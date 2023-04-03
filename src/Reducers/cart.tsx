@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "../Actions";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../Actions";
 
 const initialCartState: Array<any> = []
 
@@ -18,6 +18,13 @@ const reducer = (state = initialCartState, action: any) => {
             }))
             return state
         }
+        
+
+        case REMOVE_FROM_CART: {
+            return state.filter((item) => item.name !== action.name)
+        }
+
+
         default:
             return state
     }

@@ -1,10 +1,17 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
+import { removeFromCart } from "../Actions";
 
 function Cart() {
     const cart = useSelector((globalState: RootState) => globalState.cart)
+    const dispatch = useDispatch()
+
     const pricesArray: number[] = cart.map((item) => item.price * item.quantity)
     const overallTotal: number = pricesArray.flat().reduce((acc, sum) => acc + sum)
+
+    const remove = (name: string) => {
+        dispatch(removeFromCart(name))
+    }
     
     return(
         <div className='cart'>
@@ -29,12 +36,12 @@ function Cart() {
                                 price: ${price * quantity}
                             </td>
                             <td>
-                                delete
+                                <span onClick={() => remove(name)}>delete</span>
                             </td>
                             </tr>
                         )
                     })}
-                    <p>Total: ${overallTotal}</p>
+                    <p>Total: ${overallTotal.toFixed(2)}</p>
                 </tbody>
             </table>
         </div>
