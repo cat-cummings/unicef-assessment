@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
 import { addToCart, removeFromCart, removeOneItem } from "../Actions";
@@ -6,10 +5,9 @@ import { addToCart, removeFromCart, removeOneItem } from "../Actions";
 function Cart() {
     const cart = useSelector((globalState: RootState) => globalState.cart)
     const dispatch = useDispatch()
-    const [changes, setChanges] = useState({})
 
     const pricesArray: number[] = cart.map((item) => item.price * item.quantity)
-    const overallTotal: number = pricesArray.flat().reduce((acc, sum) => acc + sum)
+    const overallTotal: number = pricesArray.flat().reduce((acc, sum) => sum + acc, 0)
 
     const remove = (name: string) => {
         dispatch(removeFromCart(name))
@@ -21,9 +19,17 @@ function Cart() {
         dispatch(removeOneItem(name))
     }
     
+    let message: string
+
+    if (overallTotal === 0.00) {
+        message = 'Your cart is empty!'
+    } else {
+        message = 'Here are your shopping cart items'
+    }
+
     return(
         <div className='cart'>
-            <h1>Here are your shopping cart items</h1>
+            <h1>{message}</h1>
             <table>
                 <thead>
                     <tr>
@@ -45,13 +51,13 @@ function Cart() {
                                 price: ${price * quantity}
                             </td>
                             <td>
-                                <button onClick={() => remove(name)}>delete</button>
+                                <button className='cart-button' onClick={() => remove(name)}>delete</button>
                             </td>
                             <td>
-                                <button onClick={() => handlePlus(name, price)}>+</button>
+                                <button className='cart-button' onClick={() => handlePlus(name, price)}>+</button>
                             </td>
                             <td>
-                                <button onClick={() => handleMinus(name)}>-</button>
+                                <button className='cart-button' onClick={() => handleMinus(name)}>-</button>
                             </td>
                             </tr>
                         )

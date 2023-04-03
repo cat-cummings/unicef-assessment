@@ -4,7 +4,7 @@ import ShoppingListItem from "./ShoppingListItem";
 
 function ShoppingList() {
     return(
-        <div>
+        <div className='container'>
             {data.map((item) => {
                 return <ShoppingListItem item={item}/>
             })}

@@ -1,13 +1,84 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  width: 75%;
+  margin: auto;
+  background-color: #fdffcd;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row; 
+}
+
+.item {
+  margin: 50px;
+}
+
+h1 {
+  margin-top: 30px;
+}
+
+.header {
+  text-align: center;
+}
+
+a {   
+  color: black;   
+}
+
+a:visited {   
+  color: black;   
+}
+
+.welcome {
+  margin-bottom: 40px;
+}
+
+.item p {
+  margin: 5px 0;
+}
+
+.item .name {
+  margin-top: 40px;
+  font-size: x-large;
+  font-weight: 300;
+}
+
+.item p:last-child {
+  display: flex;
+  justify-content: space-between;
+  color: darkgray;
+}
+
+.item .cart-link {
+  text-align: right;
+}
+
+.cart table {
+  width: 100%;
+}
+
+.cart .update-input {
+  width: 40px;
+  text-align: center;
+  margin-bottom: 0px; /* skeleton override */
+}
+
+.cart tbody button {
+  border: 0;
+  padding-top: 10px;
+}
+
+.cart .actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-button:hover {
+  cursor: pointer;
+}
+
+.cart-link:hover {
+  cursor: pointer;
 }
