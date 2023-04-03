@@ -7,3 +7,4 @@ export const addToCart = (name: string, price: number) => {
         price: price
     }
 }
+
