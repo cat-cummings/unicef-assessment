@@ -1,16 +1,24 @@
+import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
-import { removeFromCart } from "../Actions";
+import { addToCart, removeFromCart, removeOneItem } from "../Actions";
 
 function Cart() {
     const cart = useSelector((globalState: RootState) => globalState.cart)
     const dispatch = useDispatch()
+    const [changes, setChanges] = useState({})
 
     const pricesArray: number[] = cart.map((item) => item.price * item.quantity)
     const overallTotal: number = pricesArray.flat().reduce((acc, sum) => acc + sum)
 
     const remove = (name: string) => {
         dispatch(removeFromCart(name))
+    }
+    const handlePlus = (name: string, price: number) => {
+        dispatch(addToCart(name, price))
+    }
+    const handleMinus = (name: string) => {
+        dispatch(removeOneItem(name))
     }
     
     return(
@@ -30,13 +38,20 @@ function Cart() {
                             <tr>
                             <td>{name}</td>
                             <td>
-                                <input className='update-input' value={quantity}/>
+                                {/* <input className='update-input' onChange={(e) => handleType(quantity, e)} value={quantity as keyof typeof changes || quantity}/> */}
+                                {quantity}
                             </td>
                             <td>
                                 price: ${price * quantity}
                             </td>
                             <td>
-                                <span onClick={() => remove(name)}>delete</span>
+                                <button onClick={() => remove(name)}>delete</button>
+                            </td>
+                            <td>
+                                <button onClick={() => handlePlus(name, price)}>+</button>
+                            </td>
+                            <td>
+                                <button onClick={() => handleMinus(name)}>-</button>
                             </td>
                             </tr>
                         )

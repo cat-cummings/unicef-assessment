@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../Actions";
+import { ADD_TO_CART, REMOVE_FROM_CART, REMOVE_ONE } from "../Actions";
 
 const initialCartState: Array<any> = []
 
@@ -24,6 +24,18 @@ const reducer = (state = initialCartState, action: any) => {
             return state.filter((item) => item.name !== action.name)
         }
 
+        case REMOVE_ONE: {
+            let index = state.findIndex((item) => {
+                return item.name === action.name
+            })
+            index === -1 ? (state = [...state, newItem]) : (state = state.map((item) => {
+                if (item.name === action.name) {
+                    item.quantity -= 1
+                }
+                return item
+            }))
+            return state
+        }
 
         default:
             return state
